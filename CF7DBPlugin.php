@@ -855,6 +855,9 @@ class CF7DBPlugin extends CF7DBPluginLifeCycle implements CFDBDateFormatter {
                     $foundUploadFiles[] = $nameClean;
                     $filePath = $cf7->uploaded_files[$nameClean];
                     if ($filePath) {
+	                    if ( is_array( $filePath ) ) {
+		                    $filePath = array_shift( array_values( $filePath ) );
+	                    }
                         $content = file_get_contents($filePath);
                         $didSaveFile = $wpdb->query($wpdb->prepare($parametrizedFileQuery,
                             $time,
